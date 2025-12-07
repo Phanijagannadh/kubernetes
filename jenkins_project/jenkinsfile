@@ -70,7 +70,6 @@ stages {
                     
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
 
-                      echo 'Used the direct GitHub URL in the git push command'
                     git push https://${gittoken}@github.com/Phanijagannadh/Terraform.git HEAD:main
                 '''
 				  
