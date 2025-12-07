@@ -35,21 +35,16 @@ pipeline {
 
         stage('Docker Image') {
             steps {
-                script {
-                    // Define the date variable
-                    def date = new Date().format('yyyyMMdd_HHmmss')
-                    // Build docker image
                     echo 'Docker Image build'
-                    sh "docker build -t phaniproject/type:${BUILD_NUMBER}-${JOB_NAME}-${date} ."
-                }
+                    sh "docker build -t phaniproject/type:${BUILD_NUMBER} ."
             }
         }
 
         stage('Push to Dockerhub') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerpassword')]) {
-                        sh 'docker login -u phanijagannadh -p ${dockerpassword}'
+                    withCredentials([string(credentialsId: 'dockerhub', variable: 'dockerpas')]) {
+                        sh 'docker login -u phanijagannadh -p ${dockerpas}'
                     }
                     echo 'push image to Dockerhub'
                     sh "docker push phaniproject/type:${BUILD_NUMBER}-${JOB_NAME}-${date}"
