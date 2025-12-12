@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: cont1
-        image: phaniproject/type:xyz
+        image: phanijagannadh/myproject:
         ports:
         - containerPort: 8080
