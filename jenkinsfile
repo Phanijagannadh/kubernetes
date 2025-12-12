@@ -36,7 +36,7 @@ pipeline {
         stage('Docker Image') {
             steps {
                     echo 'Docker Image build'
-                    sh "docker build -t phaniproject/type:${BUILD_NUMBER} ."
+                    sh "docker build -t phanijagannadh/myproject:${BUILD_NUMBER} ."
             }
         }
 
@@ -47,7 +47,7 @@ pipeline {
                         sh 'docker login -u phanijagannadh -p ${dockerpas}'
                     }
                     echo 'push image to Dockerhub'
-                    sh "docker push phaniproject/type:${BUILD_NUMBER}-${JOB_NAME}-${date}"
+                    sh "docker push phanijagannadh/myproject:${BUILD_NUMBER}"
                 }
             }
         }
@@ -60,7 +60,7 @@ pipeline {
                         git config user.email "phanijagan91@gmail.com"
                         git config user.name "phani"
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i "s/type:.*/phaniproject/type:${BUILD_NUMBER}-${JOB_NAME}-${date}/g" deploymentfiles/deployment.yml
+                        sed -i "s/type:.*/phanijagannadh/myproject:${BUILD_NUMBER}/g" deploymentfiles/deployment.yml
                         git add .
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${gittoken}@github.com/Phanijagannadh/Terraform.git HEAD:main
