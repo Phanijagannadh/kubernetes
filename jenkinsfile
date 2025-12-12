@@ -63,7 +63,8 @@ pipeline {
                         sed -i "s|myproject:.*|phanijagannadh/myproject:${BUILD_NUMBER}|g" deployment.yml
                         git add .
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
-                        git push https://${gittoken}@github.com/Phanijagannadh/Terraform.git HEAD:main
+                       git pull https://${gittoken}@github.com/Phanijagannadh/kubernetes.git main --rebase
+                       git push https://${gittoken}@github.com/Phanijagannadh/kubernetes.git HEAD:main
                     """
                 }
             }
