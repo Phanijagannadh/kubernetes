@@ -20,7 +20,7 @@ pipeline {
                 
                 sh '''
                     mvn sonar:sonar \\
-                        -Dsonar.host.url=http://13.211.51.203:9000/ \\
+                        -Dsonar.host.url=http://54.206.73.214:9000/ \\
                         -Dsonar.login=squ_014b2072987acf842af6e7c33d68ce5a2379cc81  -X
                 '''
             }
@@ -60,7 +60,7 @@ pipeline {
                         git config user.email "phanijagan91@gmail.com"
                         git config user.name "phani"
                         BUILD_NUMBER=${BUILD_NUMBER}
-                        sed -i "s/type:.*/phanijagannadh/myproject:${BUILD_NUMBER}/g" deploymentfiles/deployment.yml
+                        sed -i "s|myproject:.*|phanijagannadh/myproject:${BUILD_NUMBER}|g" deployment.yml
                         git add .
                         git commit -m "Update deployment image to version ${BUILD_NUMBER}"
                         git push https://${gittoken}@github.com/Phanijagannadh/Terraform.git HEAD:main
